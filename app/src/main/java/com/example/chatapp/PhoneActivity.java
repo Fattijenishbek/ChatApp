@@ -74,7 +74,8 @@ public class PhoneActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            startActivity(new Intent(PhoneActivity.this, MainActivity.class));
+                            startActivity(new Intent(PhoneActivity.this, ProfileActivity.class));
+                            finish();
                         }else {
                             Toast.makeText(PhoneActivity.this,"Auth Error" +
                                     task.getException().getMessage(),Toast.LENGTH_SHORT).show();
