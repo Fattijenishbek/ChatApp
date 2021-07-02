@@ -1,8 +1,9 @@
-package com.example.chatapp.chat;
+package com.example.chatapp.models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Chat {
+public class Chat implements Serializable {
 
     private String id;
     private List<String> userIds;
