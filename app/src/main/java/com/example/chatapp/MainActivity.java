@@ -17,6 +17,7 @@ import com.example.chatapp.interfaces.OnItemClickListener;
 import com.example.chatapp.models.Message;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -40,9 +41,23 @@ public class MainActivity extends AppCompatActivity {
         if(FirebaseAuth.getInstance().getCurrentUser()==null){
             startActivity(new Intent(this, PhoneActivity.class));
         }
-        recyclerView.findViewById(R.id.recyclerView);
-        initList();
-        getChats();
+            recyclerView = findViewById(R.id.recyclerView);
+            initList();
+            getChats();
+
+    }
+
+    /**
+     * I don't know, but this is important method
+     */
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser == null){
+            startActivity(new Intent(MainActivity.this , ContactsActivity.class));
+            finish();
+        }
     }
 
     public void onClickContacts(View view) {
