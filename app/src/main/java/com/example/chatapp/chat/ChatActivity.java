@@ -62,13 +62,6 @@ public class ChatActivity extends AppCompatActivity {
     }
 
 
-    private void initList() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        adapter = new MessageAdapter(this, list);
-        recyclerView.setAdapter(adapter);
-    }
-
     public void onClickSend(View view) {
         String text = editText.getText().toString().trim();
         if(chat.getId()!=null){
@@ -86,6 +79,13 @@ public class ChatActivity extends AppCompatActivity {
                 .collection("messages")
                 .add(map);
     }
+    private void initList() {
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        adapter = new MessageAdapter(this, list);
+        recyclerView.setAdapter(adapter);
+    }
+
     private void getMessages() {
         FirebaseFirestore.getInstance().collection("chats").document(chat.getId())
                 .collection("messages")
@@ -102,7 +102,7 @@ public class ChatActivity extends AppCompatActivity {
                                 case REMOVED:
                                     break;
                             }
-                        }
+                        }adapter.notifyDataSetChanged();
                     }
                 });
     }

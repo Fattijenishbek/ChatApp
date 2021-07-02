@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                                     Chat chat = change.getDocument().toObject(Chat.class);
                                     chat.setId(change.getDocument().getId());
                                     list.add(chat);
+                                    break;
                             }
                         }
                         adapter.notifyDataSetChanged();
